@@ -7,6 +7,7 @@ const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [authMode, setAuthMode] = useState('login');
 
+  // Sample data
   const stats = [
     { title: 'Total Products', value: '156', change: '+12%', period: 'from last month', icon: Package, trend: 'up' },
     { title: 'Active Orders', value: '28', change: '+5', period: 'new orders today', icon: ShoppingCart, trend: 'up' },
@@ -49,17 +50,20 @@ const App = () => {
   ];
 
   const LandingPage = () => (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
-      <nav className="bg-white shadow-sm">
+    <div className="min-h-screen bg-white">
+      <nav className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center">
               <Package className="w-6 h-6 text-white" />
             </div>
-            <span className="text-2xl font-bold text-green-800">Agro-Hub</span>
+            <div>
+              <div className="text-xl font-bold text-green-800">Agro-Hub Zambia</div>
+              <div className="text-xs text-gray-600">Supplier Portal</div>
+            </div>
           </div>
           <button
-            onClick={() => setIsLoggedIn(true)}
+            onClick={() => setCurrentPage('auth')}
             className="bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition"
           >
             Get Started
@@ -67,47 +71,82 @@ const App = () => {
         </div>
       </nav>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center">
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">
-            Empowering Zambian Agriculture
-          </h1>
-          <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
-            Join Zambia's trusted digital agricultural ecosystem. Connect with farmers, 
-            manage inventory, and grow your business with government-backed transparency.
-          </p>
-          <button
-            onClick={() => setIsLoggedIn(true)}
-            className="bg-green-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-700 transition shadow-lg"
-          >
-            Get Started
-          </button>
-        </div>
-
-        <div className="mt-20 grid md:grid-cols-3 gap-8">
-          <div className="bg-white p-6 rounded-xl shadow-md">
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-              <CheckCircle className="w-6 h-6 text-green-600" />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Government Verified</h3>
-            <p className="text-gray-600">FRA registered and quality certified suppliers</p>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-md">
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-              <Package className="w-6 h-6 text-green-600" />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Easy Inventory</h3>
-            <p className="text-gray-600">Manage products and track stock in real-time</p>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-md">
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-              <TrendingUp className="w-6 h-6 text-green-600" />
-            </div>
-            <h3 className="text-xl font-semibold mb-2">Grow Your Business</h3>
-            <p className="text-gray-600">Connect with farmers across Zambia</p>
+      <div className="bg-gradient-to-br from-green-600 to-emerald-700 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="text-center">
+            <h1 className="text-5xl font-bold mb-6">
+              Empowering Zambian Agriculture
+            </h1>
+            <p className="text-xl text-green-50 mb-8 max-w-3xl mx-auto">
+              Join Zambia's trusted digital agricultural ecosystem. Connect with farmers, 
+              manage inventory, and grow your business with government-backed transparency.
+            </p>
+            <button
+              onClick={() => setCurrentPage('auth')}
+              className="bg-white text-green-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition shadow-lg"
+            >
+              Join as Supplier
+            </button>
           </div>
         </div>
       </div>
+
+      <div className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white p-8 rounded-xl shadow-sm">
+              <div className="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+                <CheckCircle className="w-8 h-8 text-green-600" />
+              </div>
+              <h3 className="text-2xl font-bold mb-3">Government Verified</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Official government-backed platform ensuring trust and transparency in all transactions
+              </p>
+            </div>
+            <div className="bg-white p-8 rounded-xl shadow-sm">
+              <div className="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+                <TrendingUp className="w-8 h-8 text-green-600" />
+              </div>
+              <h3 className="text-2xl font-bold mb-3">Direct Market Access</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Connect directly with farmers and FRA, eliminating middlemen and maximizing profits
+              </p>
+            </div>
+            <div className="bg-white p-8 rounded-xl shadow-sm">
+              <div className="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+                <Package className="w-8 h-8 text-green-600" />
+              </div>
+              <h3 className="text-2xl font-bold mb-3">Grow Your Business</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Access analytics, manage inventory, and scale your agricultural supply business
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="py-20 bg-green-600 text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl font-bold mb-4">Ready to Transform Agriculture?</h2>
+          <p className="text-xl text-green-50 mb-8">
+            Join verified suppliers serving Zambia's farming community
+          </p>
+          <button
+            onClick={() => setCurrentPage('auth')}
+            className="bg-white text-green-600 px-10 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition shadow-lg"
+          >
+            Sign Up Now
+          </button>
+        </div>
+      </div>
+
+      <footer className="bg-gray-900 text-gray-400 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-sm">
+            © 2025 Agro-Hub Zambia. Government-backed digital agricultural ecosystem.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 
@@ -665,7 +704,10 @@ const App = () => {
   );
 
   if (!isLoggedIn) {
-    return <AuthPage />;
+    if (currentPage === 'auth') {
+      return <AuthPage />;
+    }
+    return <LandingPage />;
   }
 
   return <MainLayout />;
