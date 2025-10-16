@@ -7,7 +7,6 @@ const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [authMode, setAuthMode] = useState('login');
 
-  // Sample data
   const stats = [
     { title: 'Total Products', value: '156', change: '+12%', period: 'from last month', icon: Package, trend: 'up' },
     { title: 'Active Orders', value: '28', change: '+5', period: 'new orders today', icon: ShoppingCart, trend: 'up' },
